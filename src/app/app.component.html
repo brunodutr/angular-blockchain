@@ -1,20 +1,94 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- The content below is only a placeholder and can be replaced. -->
+<div class="container">
+  <blockchain-header></blockchain-header>
 
+  <div class="blockchain">
+    <h1>BlockChain</h1>
+    <div class="block container" *ngFor="let block of blockChain.chain">
+      {{ block.name }}
+
+      <blockchain-input texto="Hash" [(value)]="block.hash"> </blockchain-input>
+
+      <button
+        type="button"
+        class="btn btn-lg btn-block mb-3"
+        [ngClass]="block.hasValidTransactions() ? 'btn-success' : 'btn-danger'"
+        (click)="show(block)"
+      >
+        Transações
+      </button>
+
+      <blockchain-input texto="Previous Hash" [(value)]="block.previousHash">
+      </blockchain-input>
+    </div>
+    <!--
+      <div>
+        <img src="assets/link.png" />
+      </div>
+    -->
+  </div>
+
+  <div class="blockchain" *ngIf="showTX">
+    <div class="container">
+      <div class="row justify-content-between">
+        <h1>Transações do {{ _block.name }}</h1>
+        <button type="button" class="btn btn-link" (click)="closeTX()">
+          <i class="fa fa-times" aria-hidden="true"></i> Fechar
+        </button>
+      </div>
+    </div>
+    <div
+      class="block container"
+      *ngFor="let transaction of _block.transactions"
+    >
+      <blockchain-input texto="Signature" [(value)]="transaction.signature">
+      </blockchain-input>
+
+      <blockchain-input texto="Valor" [(value)]="transaction.amount">
+      </blockchain-input>
+
+      <blockchain-input texto="De" [(value)]="transaction.fromAddress">
+      </blockchain-input>
+
+      <blockchain-input texto="Para" [(value)]="transaction.toAddress">
+      </blockchain-input>
+    </div>
+  </div>
+
+  <div class="blockchain" *ngIf="blockChain.pendingTransactions.length > 0">
+    <div class="container">
+      <div class="row justify-content-between">
+        <h1>Transações Pendentes</h1>
+        <button
+          type="button"
+          class="btn btn-link"
+          data-toggle="modal"
+          data-target="#mineModal"
+        >
+          <i class="fa fa-btc" aria-hidden="true"></i> Mine
+        </button>
+      </div>
+    </div>
+    <div
+      class="block container"
+      *ngFor="let transaction of blockChain.pendingTransactions"
+    >
+      <blockchain-input texto="Signature" [(value)]="transaction.signature">
+      </blockchain-input>
+
+      <blockchain-input texto="Valor" [(value)]="transaction.amount">
+      </blockchain-input>
+
+      <blockchain-input texto="De" [(value)]="transaction.fromAddress">
+      </blockchain-input>
+
+      <blockchain-input texto="Para" [(value)]="transaction.toAddress">
+      </blockchain-input>
+    </div>
+  </div>
+</div>
+
+<blockchain-tx-modal (saveTX)="addTX($event)"></blockchain-tx-modal>
+<blockchain-key-modal></blockchain-key-modal>
+<blockchain-mine-modal></blockchain-mine-modal>
+<blockchain-config-modal></blockchain-config-modal>

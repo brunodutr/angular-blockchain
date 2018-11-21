@@ -1,0 +1,29 @@
+<blockchain-modal target="txModal">
+  <div class="modal-header">Nova Transação</div>
+  <div class="modal-body" *ngIf="tx">
+    
+    <blockchain-input 
+      texto="De" 
+      [(value)]="tx.fromAddress"> 
+    </blockchain-input>
+
+    <blockchain-input 
+      texto="Para" 
+      [(value)]="tx.toAddress"> 
+    </blockchain-input>
+    
+    <blockchain-input 
+      texto="Valor" 
+      [(value)]="tx.amount">
+    </blockchain-input>
+
+    <blockchain-input
+      texto="Assinatura"
+      [(value)]="tx.signature"
+    ></blockchain-input>
+
+    <button type="button" class="btn btn-primary" (click)="emit()">
+      Adicionar
+    </button>
+  </div>
+</blockchain-modal>

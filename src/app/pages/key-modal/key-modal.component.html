@@ -1,0 +1,28 @@
+<blockchain-modal target="keyModal">
+  <div class="modal-header">
+    Chaves Privada e Pública
+    <i class="fa fa-refresh" (click)="refresh()" aria-hidden="true"></i>
+  </div>
+  <div class="modal-body" *ngIf="keys">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Public Key</span>
+      </div>
+      <textarea
+        class="form-control"
+        [(ngModel)]="public_key"
+        disabled
+      ></textarea>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Private Key</span>
+      </div>
+      <textarea
+        class="form-control"
+        [(ngModel)]="private_key"
+        disabled
+      ></textarea>
+    </div>
+  </div>
+</blockchain-modal>

@@ -1,0 +1,11 @@
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">{{ texto }}</span>
+  </div>
+  <input
+    type="text"
+    (change)="emit($event)"
+    class="form-control"
+    [(ngModel)]="value"
+  />
+</div>

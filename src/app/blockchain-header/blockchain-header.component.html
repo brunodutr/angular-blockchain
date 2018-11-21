@@ -1,0 +1,21 @@
+<div class="row justify-content-between">
+  <h1>Simulador BlockChain</h1>
+  <div class="mt-2">
+    <button
+      *ngFor="let btn of buttons"
+      type="button"
+      class="btn btn-outline-primary  ml-2"
+      data-toggle="modal"
+      [attr.data-target]="btn.target"
+    >
+      <i [ngClass]="btn.icon" aria-hidden="true"></i> {{ btn.text }}
+    </button>
+
+    <div class="ml-2 d-inline" *ngIf="blockchain.wallet !== ''">
+      <h4 class="d-inline">
+        <i class="fa fa-btc" aria-hidden="true"></i> {{ valor_carteira }}
+      </h4>
+    </div>
+  </div>
+</div>
+<h2>Estado: {{ this.valid }}</h2>

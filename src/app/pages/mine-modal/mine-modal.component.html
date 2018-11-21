@@ -1,0 +1,11 @@
+<blockchain-modal target="mineModal">
+  <div class="modal-header">Minerar</div>
+  <div class="modal-body">
+    <blockchain-input texto="Public Key" [(value)]="address">
+    </blockchain-input>
+
+    <button type="button" class="btn btn-primary" (click)="mine()">
+      Minerar
+    </button>
+  </div>
+</blockchain-modal>
