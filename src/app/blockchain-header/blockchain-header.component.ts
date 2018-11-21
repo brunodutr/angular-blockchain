@@ -27,7 +27,7 @@ export class BlockchainHeaderComponent implements OnInit {
     }
   ];
 
-  constructor(private blockchain: Blockchain) {}
+  constructor(public blockchain: Blockchain) {}
 
   ngOnInit() {
     this.blockchain.isValid$.subscribe(value =>

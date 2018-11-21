@@ -15,6 +15,16 @@
         [ngClass]="block.hasValidTransactions() ? 'btn-success' : 'btn-danger'"
         (click)="show(block)"
       >
+        <i
+          class="fa fa-check"
+          *ngIf="block.hasValidTransactions()"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa fa-times"
+          *ngIf="!block.hasValidTransactions()"
+          aria-hidden="true"
+        ></i>
         Transações
       </button>
 

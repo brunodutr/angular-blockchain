@@ -25,15 +25,10 @@ export class Blockchain {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 2;
     this.pendingTransactions = [];
-    this.miningReward = 100;
+    this.miningReward = 10;
     this.keys = generateKeys();
     interval(1000).subscribe(() => {
       this.valid();
-
-      if (this.wallet) {
-        let value = this.getBalanceOfAddress(this.wallet);
-        this.walletAmount$.next(value);
-      }
     });
   }
 
@@ -56,7 +51,7 @@ export class Blockchain {
     const rewardTx = new Transaction(
       this.keys.getPublic('hex'),
       miningRewardAddress,
-      this.miningReward
+      '' + this.miningReward
     );
 
     rewardTx.signTransaction(this.keys);
@@ -75,6 +70,11 @@ export class Blockchain {
     this.chain.push(block);
 
     this.pendingTransactions = [];
+
+    if (this.wallet) {
+      let value = this.getBalanceOfAddress(this.wallet);
+      this.walletAmount$.next(value);
+    }
   }
 
   addTransaction(transaction: Transaction) {
@@ -97,11 +97,11 @@ export class Blockchain {
     for (const block of this.chain) {
       for (const trans of block.transactions) {
         if (trans.fromAddress === address) {
-          balance -= trans.amount;
+          balance -= parseFloat('' + trans.amount);
         }
 
         if (trans.toAddress === address) {
-          balance += trans.amount;
+          balance += parseFloat('' + trans.amount);
         }
       }
     }

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   showTX: boolean;
 
-  constructor(private blockChain: Blockchain) {}
+  constructor(public blockChain: Blockchain) {}
 
   ngOnInit(): void {}
 

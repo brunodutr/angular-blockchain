@@ -4,6 +4,7 @@
   width: auto;
   overflow-x: auto;
   margin-bottom: 50px;
+  margin-top: 50px;
 }
 .blockchain > .block {
   background: #ccc;
@@ -14,3 +15,10 @@
   padding: 10px;
 }
 
+.verde {
+  color: green;
+}
+
+.vermelho {
+  color: red;
+}

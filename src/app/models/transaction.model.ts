@@ -11,10 +11,10 @@ export class Transaction {
   fromAddress: string;
   timestamp: number;
 
-  constructor(fromAddress: string, toAddress: string, amount: number) {
+  constructor(fromAddress: string, toAddress: string, amount: string) {
     this.fromAddress = fromAddress;
     this.toAddress = toAddress;
-    this.amount = amount;
+    this.amount = parseFloat(amount);
     this.timestamp = Date.now();
   }
 

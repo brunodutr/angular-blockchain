@@ -13,9 +13,25 @@
 
     <div class="ml-2 d-inline" *ngIf="blockchain.wallet !== ''">
       <h4 class="d-inline">
-        <i class="fa fa-btc" aria-hidden="true"></i> {{ valor_carteira }}
+        <i class="fa fa-btc" aria-hidden="true"></i>
+        {{ valor_carteira | number }}
       </h4>
     </div>
   </div>
 </div>
-<h2>Estado: {{ this.valid }}</h2>
+<h2>
+  Estado:
+  <span [ngClass]="valid === 'Válido' ? 'verde' : 'vermelho'"
+    >{{ this.valid }}
+  </span>
+</h2>
+
+<style>
+  .verde {
+    color: green;
+  }
+
+  .vermelho {
+    color: red;
+  }
+</style>

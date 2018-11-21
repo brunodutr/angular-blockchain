@@ -23,7 +23,7 @@ export class TxModalComponent implements OnInit {
   ngOnInit() {
     this.tx = {
       toAddress: '',
-      fromAddress: this.blockchain.wallet,
+      fromAddress: '',
       amount: '',
       signature: ''
     };
@@ -35,7 +35,7 @@ export class TxModalComponent implements OnInit {
     let _tx = new Transaction(
       this.tx.fromAddress,
       this.tx.toAddress,
-      parseFloat(this.tx.amount)
+      this.tx.amount
     );
 
     _tx.signTransaction(keys);
